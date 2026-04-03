@@ -74,6 +74,14 @@
   color: white;
 }
 
+/* 语音状态提示 */
+.voice-status{
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+}
+
 /* 识别结果显示 */
 .recognized-text{
   margin-top: 30rpx;
@@ -94,6 +102,36 @@
   font-size: 30rpx;
   color: #333;
   line-height: 1.6;
+}
+
+/* 语音不支持提示 */
+.voice-unsupported{
+  margin: 40rpx 0;
+  padding: 40rpx 32rpx;
+  background: #fff3cd;
+  border-radius: 16rpx;
+  text-align: center;
+  border: 2rpx solid #ffc107;
+}
+
+.unsupported-icon{
+  font-size: 60rpx;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.unsupported-text{
+  font-size: 28rpx;
+  color: #856404;
+  display: block;
+  margin-bottom: 12rpx;
+  font-weight: 500;
+}
+
+.unsupported-tip{
+  font-size: 24rpx;
+  color: #856404;
+  opacity: 0.8;
 }
 
 /* 文本输入区域 */

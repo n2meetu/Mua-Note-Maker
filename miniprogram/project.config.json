@@ -1,4 +1,6 @@
 {
+  "miniprogramRoot": "./",
+  "compileType": "miniprogram",
   "setting": {
     "es6": true,
     "postcss": true,
@@ -14,13 +16,17 @@
     "useCompilerPlugins": false,
     "minifyWXML": true
   },
-  "compileType": "miniprogram",
   "simulatorPluginLibVersion": {},
   "packOptions": {
     "ignore": [],
     "include": []
   },
   "appid": "wx07f4ad62601fb8ef",
+  "libVersion": "3.15.0",
+  "projectname": "Mua-Note-Maker",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
   "permission": {
     "scope.record": {
       "desc": "用于语音记录做菜步骤"
