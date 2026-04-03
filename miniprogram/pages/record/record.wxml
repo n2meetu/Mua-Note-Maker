@@ -1,38 +1,36 @@
 <view class="container">
   <view class="header">
-    <text class="title">📝 美食笔记生成器</text>
-  <text class="subtitle">记录你的拿手好菜</text>
+    <text class="title">📝 磨食笔记生成器</text>
+    <text class="subtitle">记录你的拿手好菜</text>
   </view>
 
   <!-- 语音识别区域 -->
-  <view class="voice-section" wx:if="{{voiceSupported}}">
+  <view class="voice-section">
+    <!-- 语音状态提示 -->
+    <view class="voice-status">
+      <text class="status-text">{{voiceStatusText}}</text>
+    </view>
+    
+    <!-- 语音按钮 -->
     <button 
       class="voice-btn {{isRecording ? 'recording' : ''}}"
-      bindtouchstart="handleVoicePress"
-      bindtouchend="handleVoicePress"
+      bindtap="handleVoicePress"
+      disabled="{{!voiceSupported}}"
     >
       <text class="voice-icon">{{isRecording ? '🎤' : '🎙️'}}</text>
       <text class="voice-text">{{voiceButtonText}}</text>
     </button>
     
+    <!-- 识别结果显示 -->
     <view class="recognized-text" wx:if="{{recognizedText}}">
-      <text class="label">识别结果：</text>
+      <text class="label">识别结果:</text>
       <text class="content">{{recognizedText}}</text>
     </view>
-    
-    <view class="voice-status">{{voiceStatusText}}</view>
-  </view>
-  
-  <!-- 语音不支持提示 -->
-  <view class="voice-unsupported" wx:else>
-    <text class="unsupported-icon">⚠️</text>
-    <text class="unsupported-text">{{voiceStatusText}}</text>
-    <text class="unsupported-tip">请直接使用下方输入框记录</text>
   </view>
 
   <!-- 文本输入区域 -->
   <view class="text-section">
-    <view class="text-label">手动输入：</view>
+    <view class="text-label">手动输入:</view>
     <textarea 
       class="text-input"
       value="{{recordText}}"
