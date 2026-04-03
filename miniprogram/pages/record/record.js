@@ -1,145 +1,114 @@
 const app = getApp()
 const config = require('../../utils/config')
-const recorderManager = wx.getRecorderManager()
-const recognizerManager = wx.createRecognizerTask()
 
 Page({
   data: {
+    recordText: '步骤如下：\n1️⃣艾理干净 清洗3遍，焯水\n2️⃣切好食材 备用\n3️⃣下锅炒制 加调料',
     isRecording: false,
-    recordText: '',
-    duration: 0,
-    formattedDuration: '00:00'
+    recognizedText: '',
+    voiceButtonText: '按住说话'
   },
 
   onLoad() {
-    // 初始化录音管理器
-    recorderManager.onStop((res) => {
-      console.log('录音结束', res)
-      this.processVoice(res.tempFilePath)
+    this.initRecognizer()
+  },
+
+  initRecognizer() {
+    // 创建语音识别器
+    this.recognizerManager = wx.createRecognizerContext()
+    
+    // 实时识别回调
+    this.recognizerManager.onRecognize((res) => {
+      console.log('实时识别结果:', res.result)
+      this.setData({
+        recognizedText: res.result
+      })
     })
 
-    recorderManager.onError((err) => {
-      console.error('录音错误', err)
+    // 识别错误回调
+    this.recognizerManager.onError((err) => {
+      console.error('识别错误:', err)
       wx.showToast({
-        title: '录音失败',
+        title: '识别失败，请重试',
         icon: 'none'
       })
-      this.setData({ isRecording: false })
+      this.setData({
+        isRecording: false,
+        voiceButtonText: '按住说话'
+      })
     })
 
-    // 初始化语音识别
-    recognizerManager.onRecognize((res) => {
-      console.log('识别中', res)
+    // 识别结束回调
+    this.recognizerManager.onStop((res) => {
+      console.log('识别结束:', res.result)
       if (res.result) {
         this.setData({
-          recordText: res.result
+          recordText: this.data.recordText + '\n' + res.result,
+          recognizedText: res.result
         })
-      }
-    })
-
-    recognizerManager.onComplete((res) => {
-      console.log('识别完成', res)
-      if (res.result) {
-        this.setData({
-          recordText: res.result
-        })
-        app.globalData.voiceText = res.result
       }
     })
   },
 
-  // 开始/停止录音
-  toggleRecord() {
-    if (this.data.isRecording) {
-      this.stopRecord()
-    } else {
-      this.startRecord()
+  // 开始语音识别
+  startVoiceRecognition() {
+    if (this.data.isRecording) return
+
+    wx.showLoading({
+      title: '正在初始化...',
+      mask: true
+    })
+
+    const options = {
+      lang: 'zh_CN',
+      continuous: true,  // 持续识别
+      punct: true  // 自动添加标点
     }
-  },
 
-  startRecord() {
-    // 请求录音权限
-    wx.authorize({
-      scope: 'scope.record',
-      success: () => {
-        // 开始录音
-        recorderManager.start({
-          duration: config.MAX_RECORD_DURATION * 1000,
-          format: 'mp3'
-        })
-
-        // 开始语音识别
-        recognizerManager.start({
-          lang: 'zh_CN',
-          continuous: true
-        })
-
-        this.setData({
-          isRecording: true,
-          duration: 0,
-          recordText: ''
-        })
-
-        // 开始计时
-        this.timer = setInterval(() => {
-          const duration = this.data.duration + 1
-          const minutes = Math.floor(duration / 60)
-          const seconds = duration % 60
-          
-          this.setData({
-            duration,
-            formattedDuration: `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
-          })
-        }, 1000)
-      },
-      fail: () => {
-        wx.showModal({
-          title: '提示',
-          content: '需要录音权限才能使用语音功能',
-          success: (res) => {
-            if (res.confirm) {
-              wx.openSetting()
-            }
-          }
-        })
-      }
-    })
-  },
-
-  stopRecord() {
-    recorderManager.stop()
-    recognizerManager.stop()
+    this.recognizerManager.start(options)
     
-    if (this.timer) {
-      clearInterval(this.timer)
-      this.timer = null
-    }
-
     this.setData({
-      isRecording: false
+      isRecording: true,
+      voiceButtonText: '松开结束',
+      recognizedText: ''
+    })
+
+    wx.hideLoading()
+  },
+
+  // 停止语音识别
+  stopVoiceRecognition() {
+    if (!this.data.isRecording) return
+
+    this.recognizerManager.stop()
+    
+    this.setData({
+      isRecording: false,
+      voiceButtonText: '按住说话'
     })
   },
 
-  // 处理语音文件
-  processVoice(tempFilePath) {
-    wx.showLoading({ title: '识别中...' })
-    
-    // 微信小程序自带的语音识别已经处理了，这里可以做一些额外的处理
-    wx.hideLoading()
-    
-    if (!this.data.recordText) {
-      wx.showToast({
-        title: '未识别到语音内容',
-        icon: 'none'
-      })
+  // 手指长按事件
+  handleVoicePress() {
+    if (this.data.isRecording) {
+      this.stopVoiceRecognition()
+    } else {
+      this.startVoiceRecognition()
     }
+  },
+
+  // 输入文字
+  onTextInput(e) {
+    this.setData({
+      recordText: e.detail.value
+    })
   },
 
   // 生成笔记
   generateNote() {
-    if (!this.data.recordText) {
+    if (!this.data.recordText.trim()) {
       wx.showToast({
-        title: '请先录制语音',
+        title: '请先输入做菜步骤',
         icon: 'none'
       })
       return

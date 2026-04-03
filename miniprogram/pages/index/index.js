@@ -3,15 +3,13 @@ const config = require('../../utils/config')
 
 Page({
   data: {
-    images: [],
-    hasImages: false
+    images: ['/images/default.jpg'],
+    hasImages: true
   },
 
   onLoad() {
-    // 清空全局数据
-    app.globalData.images = []
-    app.globalData.voiceText = ''
-    app.globalData.generatedNote = null
+    // 保存到全局数据
+    app.globalData.images = this.data.images
   },
 
   // 选择图片

@@ -1,25 +1,40 @@
 <view class="container">
   <view class="header">
-    <text class="title">🎙️ 描述你的美食制作</text>
-    <text class="tip">按住按钮开始录音，说说做菜步骤和心得</text>
+    <text class="title">📝 美食笔记生成器</text>
+  <text class="subtitle">记录你的拿手好菜</text>
   </view>
 
-  <view class="record-section">
-    <view class="record-btn {{isRecording ? 'recording' : ''}}" bindtouchstart="toggleRecord" bindtouchend="toggleRecord">
-      <text class="record-icon">{{isRecording ? '⏹' : '🎤'}}</text>
-      <text class="record-text">{{isRecording ? '松开停止' : '按住录音'}}</text>
+  <!-- 语音识别区域 -->
+  <view class="voice-section">
+    <button 
+      class="voice-btn {{isRecording ? 'recording' : ''}}"
+      bindtouchstart="handleVoicePress"
+      bindtouchend="handleVoicePress"
+    >
+      <text class="voice-icon">{{isRecording ? '🎤' : '🎙️'}}</text>
+      <text class="voice-text">{{voiceButtonText}}</text>
+    </button>
+    
+    <view class="recognized-text" wx:if="{{recognizedText}}">
+      <text class="label">识别结果：</text>
+      <text class="content">{{recognizedText}}</text>
     </view>
-
-    <view class="duration" wx:if="{{isRecording}}">
-      <text>{{formattedDuration}}</text>
-    </view>
   </view>
 
-  <view class="text-section" wx:if="{{recordText}}">
-    <view class="text-label">识别结果：</view>
-    <view class="text-content">{{recordText}}</view>
+  <!-- 文本输入区域 -->
+  <view class="text-section">
+    <view class="text-label">手动输入：</view>
+    <textarea 
+      class="text-input"
+      value="{{recordText}}"
+      bindinput="onTextInput"
+      placeholder="或直接输入做菜步骤..."
+      maxlength="500"
+    ></textarea>
+    <view class="char-count">{{recordText.length}}/500</view>
   </view>
 
+  <!-- 底部按钮 -->
   <view class="footer">
     <button class="btn-secondary" bindtap="goBack">返回上一步</button>
     <button class="btn-primary" bindtap="generateNote">生成笔记</button>

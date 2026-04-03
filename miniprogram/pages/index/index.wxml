@@ -21,7 +21,7 @@
   </view>
 
   <view class="footer">
-    <button class="btn-primary" bindtap="nextStep" disabled="{{!hasImages}}">
+    <button class="btn-primary" bindtap="nextStep">
       下一步：录制语音
     </button>
   </view>

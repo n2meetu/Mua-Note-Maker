@@ -1,25 +1,64 @@
 <view class="container">
   <view class="header">
     <text class="title">✨ 笔记预览</text>
-    <text class="tip">可以点击标题和内容进行微调</text>
+    <text class="tip">点击下方内容可以直接编辑</text>
   </view>
 
   <view class="note-section" wx:if="{{!isLoading}}">
     <!-- 标题 -->
-    <view class="note-title" bindtap="editTitle">
-      <text>{{title || '点击编辑标题'}}</text>
-      <text class="edit-icon">✏️</text>
+    <view class="note-block">
+      <view class="block-label">标题</view>
+      <view class="note-title {{isEditingTitle ? 'editing' : ''}}" bindtap="startEditTitle">
+        <text wx:if="{{!isEditingTitle}}">{{title || '点击编辑标题'}}</text>
+        <textarea 
+          wx:else
+          class="edit-input title-input"
+          value="{{title}}"
+          bindinput="onTitleInput"
+          bindblur="finishEditTitle"
+          focus="{{isEditingTitle}}"
+          maxlength="50"
+          auto-height
+        />
+        <text class="edit-icon" wx:if="{{!isEditingTitle}}">✏️</text>
+      </view>
     </view>
 
     <!-- 内容 -->
-    <view class="note-content" bindtap="editContent">
-      <text>{{content || '点击编辑内容'}}</text>
-      <text class="edit-icon">✏️</text>
+    <view class="note-block">
+      <view class="block-label">正文</view>
+      <view class="note-content {{isEditingContent ? 'editing' : ''}}" bindtap="startEditContent">
+        <text wx:if="{{!isEditingContent}}">{{content || '点击编辑内容'}}</text>
+        <textarea 
+          wx:else
+          class="edit-input content-input"
+          value="{{content}}"
+          bindinput="onContentInput"
+          bindblur="finishEditContent"
+          focus="{{isEditingContent}}"
+          maxlength="1000"
+          auto-height
+        />
+        <text class="edit-icon" wx:if="{{!isEditingContent}}">✏️</text>
+      </view>
     </view>
 
     <!-- 标签 -->
-    <view class="note-tags">
-      <text>{{tags}}</text>
+    <view class="note-block">
+      <view class="block-label">标签</view>
+      <view class="note-tags {{isEditingTags ? 'editing' : ''}}" bindtap="startEditTags">
+        <text wx:if="{{!isEditingTags}}">{{tags || '#美食 #分享'}}</text>
+        <input 
+          wx:else
+          class="edit-input tags-input"
+          value="{{tags}}"
+          bindinput="onTagsInput"
+          bindblur="finishEditTags"
+          focus="{{isEditingTags}}"
+          maxlength="100"
+        />
+        <text class="edit-icon" wx:if="{{!isEditingTags}}">✏️</text>
+      </view>
     </view>
   </view>
 
@@ -28,7 +67,7 @@
   </view>
 
   <view class="footer">
-    <button class="btn-secondary" bindtap="regenerate" disabled="{{isLoading}}">重新生成</button>
+    <button class="btn-secondary" bindtap="goBackToEdit" disabled="{{isLoading}}">返回编辑</button>
     <button class="btn-primary" bindtap="copyNote" disabled="{{isLoading}}">复制文案</button>
   </view>
 

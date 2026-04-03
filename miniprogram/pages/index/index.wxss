@@ -79,6 +79,38 @@
   margin-top: 8rpx;
 }
 
+.example-section {
+  margin: 60rpx 0;
+  text-align: center;
+}
+
+.example-title {
+  display: block;
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 24rpx;
+}
+
+.example-preview {
+  width: 300rpx;
+  height: 300rpx;
+  margin: 0 auto 24rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.1);
+}
+
+.example-preview image {
+  width: 100%;
+  height: 100%;
+}
+
+.example-tip {
+  display: block;
+  font-size: 28rpx;
+  color: #999;
+}
+
 .footer {
   margin-top: 80rpx;
 }

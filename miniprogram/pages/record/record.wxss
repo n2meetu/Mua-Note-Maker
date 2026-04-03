@@ -3,7 +3,7 @@
   padding: 40rpx 0;
 }
 
-.title {
+.title{
   display: block;
   font-size: 48rpx;
   font-weight: bold;
@@ -11,91 +11,147 @@
   margin-bottom: 16rpx;
 }
 
-.tip {
+.subtitle{
   display: block;
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: #999;
+  margin-top: 8rpx;
 }
 
-.record-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 80rpx 0;
+/* 语音识别区域 */
+.voice-section{
+  margin: 40rpx 0;
+  padding: 32rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16rpx;
+  text-align: center;
 }
 
-.record-btn {
-  width: 240rpx;
-  height: 240rpx;
-  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+.voice-btn{
+  width: 300rpx;
+  height: 300rpx;
   border-radius: 50%;
+  background: white;
+  border: none;
+  box-shadow: 0 8rpx 20rpx rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8rpx 24rpx rgba(255, 107, 107, 0.3);
-  transition: all 0.3s;
+  margin: 0 auto;
+  transition: all 0.3s ease;
 }
 
-.record-btn.recording {
-  background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
-  box-shadow: 0 8rpx 24rpx rgba(76, 175, 80, 0.3);
-  transform: scale(1.1);
+.voice-btn.recording{
+  background: #ff4757;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
-.record-icon {
-  font-size: 80rpx;
-  line-height: 1;
+@keyframes pulse{
+  0%, 100%{
+    transform: scale(1);
+    box-shadow: 0 8rpx 20rpx rgba(255,71,87,0.3);
+  }
+  50%{
+    transform: scale(1.05);
+    box-shadow: 0 12rpx 30rpx rgba(255,71,87,0.5);
+  }
 }
 
-.record-text {
+.voice-icon{
+  font-size: 60rpx;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.voice-text{
   font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.voice-btn.recording .voice-text{
   color: white;
-  margin-top: 16rpx;
 }
 
-.duration {
-  margin-top: 40rpx;
-  font-size: 48rpx;
-  font-weight: bold;
-  color: #FF6B6B;
-}
-
-.text-section {
-  margin: 40rpx 0;
-  padding: 32rpx;
+/* 识别结果显示 */
+.recognized-text{
+  margin-top: 30rpx;
   background: white;
-  border-radius: 16rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  border-radius: 12rpx;
+  padding: 20rpx;
+  text-align: left;
 }
 
-.text-label {
-  font-size: 28rpx;
-  color: #999;
-  margin-bottom: 16rpx;
+.recognized-text .label{
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 10rpx;
 }
 
-.text-content {
-  font-size: 32rpx;
+.recognized-text .content{
+  font-size: 30rpx;
   color: #333;
   line-height: 1.6;
 }
 
-.footer {
+/* 文本输入区域 */
+.text-section{
+  margin: 60rpx 0;
+  background: white;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.text-label{
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  font-weight: 500;
+}
+
+.text-input{
+  width: 100%;
+  min-height: 500rpx;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  background: #f8f8f8;
+  font-size: 30rpx;
+  line-height: 1.8;
+}
+
+.char-count{
+  text-align: right;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 12rpx;
+}
+
+/* 底部按钮 */
+.footer{
   margin-top: 80rpx;
   display: flex;
   gap: 20rpx;
+  padding: 0 20rpx;
 }
 
-.footer button {
+.footer button{
   flex: 1;
-}
-
-.btn-secondary {
-  background-color: #f8f8f8;
-  color: #666;
   border-radius: 50rpx;
   padding: 20rpx 40rpx;
   font-size: 32rpx;
   border: none;
+}
+
+.btn-secondary{
+  background-color: #f8f8f8;
+  color: #666;
+}
+
+.btn-primary{
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 500;
 }

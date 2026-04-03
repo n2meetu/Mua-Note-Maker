@@ -1,0 +1,30 @@
+{
+  "setting": {
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "uglifyFileName": false,
+    "enhance": true,
+    "packNpmRelationList": [],
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useCompilerPlugins": false,
+    "minifyWXML": true
+  },
+  "compileType": "miniprogram",
+  "simulatorPluginLibVersion": {},
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "appid": "wx07f4ad62601fb8ef",
+  "permission": {
+    "scope.record": {
+      "desc": "用于语音记录做菜步骤"
+    }
+  },
+  "editorSetting": {}}]}
+}
