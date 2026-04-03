@@ -1,0 +1,101 @@
+.header {
+  text-align: center;
+  padding: 40rpx 0;
+}
+
+.title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.tip {
+  display: block;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.record-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+}
+
+.record-btn {
+  width: 240rpx;
+  height: 240rpx;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 107, 0.3);
+  transition: all 0.3s;
+}
+
+.record-btn.recording {
+  background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+  box-shadow: 0 8rpx 24rpx rgba(76, 175, 80, 0.3);
+  transform: scale(1.1);
+}
+
+.record-icon {
+  font-size: 80rpx;
+  line-height: 1;
+}
+
+.record-text {
+  font-size: 28rpx;
+  color: white;
+  margin-top: 16rpx;
+}
+
+.duration {
+  margin-top: 40rpx;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #FF6B6B;
+}
+
+.text-section {
+  margin: 40rpx 0;
+  padding: 32rpx;
+  background: white;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.text-label {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 16rpx;
+}
+
+.text-content {
+  font-size: 32rpx;
+  color: #333;
+  line-height: 1.6;
+}
+
+.footer {
+  margin-top: 80rpx;
+  display: flex;
+  gap: 20rpx;
+}
+
+.footer button {
+  flex: 1;
+}
+
+.btn-secondary {
+  background-color: #f8f8f8;
+  color: #666;
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+  font-size: 32rpx;
+  border: none;
+}

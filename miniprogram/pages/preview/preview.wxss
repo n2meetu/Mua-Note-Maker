@@ -1,0 +1,118 @@
+.header {
+  text-align: center;
+  padding: 40rpx 0;
+}
+
+.title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.tip {
+  display: block;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.note-section {
+  margin: 40rpx 0;
+  padding: 32rpx;
+  background: white;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.note-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 32rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-icon {
+  font-size: 28rpx;
+  opacity: 0.3;
+}
+
+.note-content {
+  font-size: 30rpx;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 32rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.note-tags {
+  font-size: 28rpx;
+  color: #FF6B6B;
+  line-height: 1.6;
+}
+
+.loading-section {
+  padding: 80rpx 0;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 32rpx;
+  color: #999;
+}
+
+.footer {
+  margin-top: 60rpx;
+  display: flex;
+  gap: 20rpx;
+}
+
+.footer button {
+  flex: 1;
+}
+
+.btn-secondary {
+  background-color: #f8f8f8;
+  color: #666;
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+  font-size: 32rpx;
+  border: none;
+}
+
+.btn-secondary[disabled] {
+  opacity: 0.5;
+}
+
+.tip-section {
+  margin-top: 60rpx;
+  text-align: center;
+}
+
+.tip-text {
+  display: block;
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 20rpx;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #FF6B6B;
+  font-size: 28rpx;
+  padding: 0;
+  line-height: normal;
+}
+
+.btn-link::after {
+  border: none;
+}

@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="header">
+    <text class="title">✨ 笔记预览</text>
+    <text class="tip">可以点击标题和内容进行微调</text>
+  </view>
+
+  <view class="note-section" wx:if="{{!isLoading}}">
+    <!-- 标题 -->
+    <view class="note-title" bindtap="editTitle">
+      <text>{{title || '点击编辑标题'}}</text>
+      <text class="edit-icon">✏️</text>
+    </view>
+
+    <!-- 内容 -->
+    <view class="note-content" bindtap="editContent">
+      <text>{{content || '点击编辑内容'}}</text>
+      <text class="edit-icon">✏️</text>
+    </view>
+
+    <!-- 标签 -->
+    <view class="note-tags">
+      <text>{{tags}}</text>
+    </view>
+  </view>
+
+  <view class="loading-section" wx:if="{{isLoading}}">
+    <text class="loading-text">AI 正在生成笔记...</text>
+  </view>
+
+  <view class="footer">
+    <button class="btn-secondary" bindtap="regenerate" disabled="{{isLoading}}">重新生成</button>
+    <button class="btn-primary" bindtap="copyNote" disabled="{{isLoading}}">复制文案</button>
+  </view>
+
+  <view class="tip-section">
+    <text class="tip-text">💡 复制后打开小红书，粘贴即可发布</text>
+    <button class="btn-link" bindtap="goHome">返回首页</button>
+  </view>
+</view>

@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="header">
+    <text class="title">📸 选择美食照片</text>
+    <text class="tip">支持最多9张图片，记录你的美食制作过程</text>
+  </view>
+
+  <view class="image-section">
+    <view class="image-list">
+      <block wx:for="{{images}}" wx:key="index">
+        <view class="image-item">
+          <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-src="{{item}}" />
+          <view class="delete-btn" bindtap="deleteImage" data-index="{{index}}">×</view>
+        </view>
+      </block>
+      
+      <view class="add-image" bindtap="chooseImage" wx:if="{{images.length < 9}}">
+        <text class="add-icon">+</text>
+        <text class="add-text">添加图片</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer">
+    <button class="btn-primary" bindtap="nextStep" disabled="{{!hasImages}}">
+      下一步：录制语音
+    </button>
+  </view>
+</view>

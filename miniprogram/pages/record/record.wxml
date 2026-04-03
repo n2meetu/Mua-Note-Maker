@@ -1,0 +1,27 @@
+<view class="container">
+  <view class="header">
+    <text class="title">🎙️ 描述你的美食制作</text>
+    <text class="tip">按住按钮开始录音，说说做菜步骤和心得</text>
+  </view>
+
+  <view class="record-section">
+    <view class="record-btn {{isRecording ? 'recording' : ''}}" bindtouchstart="toggleRecord" bindtouchend="toggleRecord">
+      <text class="record-icon">{{isRecording ? '⏹' : '🎤'}}</text>
+      <text class="record-text">{{isRecording ? '松开停止' : '按住录音'}}</text>
+    </view>
+
+    <view class="duration" wx:if="{{isRecording}}">
+      <text>{{formattedDuration}}</text>
+    </view>
+  </view>
+
+  <view class="text-section" wx:if="{{recordText}}">
+    <view class="text-label">识别结果：</view>
+    <view class="text-content">{{recordText}}</view>
+  </view>
+
+  <view class="footer">
+    <button class="btn-secondary" bindtap="goBack">返回上一步</button>
+    <button class="btn-primary" bindtap="generateNote">生成笔记</button>
+  </view>
+</view>
