@@ -15,8 +15,8 @@
 
 ### 前端（微信小程序）
 - 原生小程序框架
-- 微信语音识别 API
-- Canvas 图片处理
+- **wx.getRecorderManager()** - 微信官方录音 API
+- **wx.uploadFile()** - 音频文件上传
 
 ### 后端（Node.js）
 - Express 框架
@@ -93,6 +93,16 @@ const API_BASE_URL = 'http://your-server-ip:3000'
 5. 预览并微调文案
 6. 点击"复制文案"
 7. 打开小红书，粘贴发布
+
+## 重要说明
+
+### ⚠️ 语音识别修复（2026-04-03）
+
+原代码使用了不存在的 `wx.createRecognizerContext()` API，已修复：
+- ✅ 改用微信官方的 `wx.getRecorderManager()` 进行录音
+- ✅ 添加后端语音识别服务（支持 Mock/腾讯云/百度云）
+- ✅ 通过 HTTP 上传音频文件到服务器进行识别
+- 📝 详见：[语音识别修复说明](docs/voice-recognition-fix.md)
 
 ## 开发计划
 

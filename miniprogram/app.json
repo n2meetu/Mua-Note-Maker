@@ -11,5 +11,13 @@
     "navigationBarTextStyle": "white"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.record": {
+      "desc": "用于语音识别做菜步骤"
+    }
+  },
+  "requiredPrivateInfos": [
+    "chooseAddress"
+  ]
 }
