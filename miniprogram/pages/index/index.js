@@ -3,8 +3,8 @@ const config = require('../../utils/config')
 
 Page({
   data: {
-    images: ['/images/default.jpg'],
-    hasImages: true
+    images: [],
+    hasImages: false
   },
 
   onLoad() {

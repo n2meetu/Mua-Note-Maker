@@ -1,4 +1,5 @@
 {
+  "ignoreUploadDomain": ["mua-note-maker.vercel.app"],
   "miniprogramRoot": "./",
   "compileType": "miniprogram",
   "setting": {
