@@ -6,18 +6,18 @@ const noteService = require('../services/noteService')
 router.post('/generate', async (req, res) => {
   try {
     const { voiceText, imageCount } = req.body
-    
-    if (!voiceText) {
+
+    if (!voiceText || voiceText.length > 5000) {
       return res.status(400).json({
         success: false,
-        message: '缺少语音内容'
+        message: '语音内容长度需在 1-5000 字符之间'
       })
     }
 
     console.log('📝 生成笔记请求:', { voiceText, imageCount })
 
     const result = await noteService.generateNote(voiceText, imageCount)
-    
+
     res.json({
       success: true,
       data: result

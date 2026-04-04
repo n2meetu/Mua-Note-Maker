@@ -20,12 +20,23 @@ Page({
   generateNote() {
     wx.showLoading({ title: '生成中...' })
 
+    // 从本地存储读取数据
+    let voiceText = ''
+    let imageCount = 0
+    try {
+      voiceText = wx.getStorageSync('voiceText') || ''
+      const images = wx.getStorageSync('images') || []
+      imageCount = images.length
+    } catch (err) {
+      console.error('❌ 读取本地存储失败:', err)
+    }
+
     wx.request({
       url: config.API.GENERATE_NOTE,
       method: 'POST',
       data: {
-        voiceText: app.globalData.voiceText,
-        imageCount: app.globalData.images.length
+        voiceText,
+        imageCount
       },
       timeout: 30000,
       success: (res) => {
@@ -43,7 +54,9 @@ Page({
               tags,
               isLoading: false
             })
-            app.globalData.generatedNote = result.data
+            
+            // 保存到本地存储
+            this.saveGeneratedNote(result.data)
             
             wx.showToast({
               title: '✅ 生成成功',
@@ -59,7 +72,7 @@ Page({
                 tags: tags || '#美食 #分享',
                 isLoading: false
               })
-              app.globalData.generatedNote = result.data
+              this.saveGeneratedNote(result.data)
               
               wx.showToast({
                 title: '⚠️ 使用测试数据',
@@ -101,7 +114,7 @@ Page({
 
 📝 制作步骤：
 Step1️⃣ 排骨冷水下锅，焯水去腥
-Step2️⃣ 锅里放油，加冰糖炒糖色
+Step2️⃣ 锅里放油,加冰糖炒糖色
 Step3️⃣ 下排骨翻炒上色
 Step4️⃣ 加生抽、老抽、料酒
 Step5️⃣ 倒入开水，小火炖40分钟
@@ -117,12 +130,22 @@ Step6️⃣ 大火收汁，撒上葱花
       isLoading: false
     })
     
-    app.globalData.generatedNote = mockData
+    // 保存到本地存储
+    this.saveGeneratedNote(mockData)
     
     wx.showToast({
       title: '使用测试数据',
       icon: 'none'
     })
+  },
+
+  // 保存生成的笔记到本地存储
+  saveGeneratedNote(note) {
+    try {
+      wx.setStorageSync('generatedNote', note)
+    } catch (err) {
+      console.error('❌ 保存失败:', err)
+    }
   },
 
   // 编辑标题
@@ -136,7 +159,8 @@ Step6️⃣ 大火收汁，撒上葱花
 
   finishEditTitle() {
     this.setData({ isEditingTitle: false })
-    app.globalData.generatedNote.title = this.data.title
+    // 更新本地存储
+    this.updateGeneratedNote({ title: this.data.title })
   },
 
   // 编辑内容
@@ -150,7 +174,8 @@ Step6️⃣ 大火收汁，撒上葱花
 
   finishEditContent() {
     this.setData({ isEditingContent: false })
-    app.globalData.generatedNote.content = this.data.content
+    // 更新本地存储
+    this.updateGeneratedNote({ content: this.data.content })
   },
 
   // 编辑标签
@@ -164,7 +189,19 @@ Step6️⃣ 大火收汁，撒上葱花
 
   finishEditTags() {
     this.setData({ isEditingTags: false })
-    app.globalData.generatedNote.tags = this.data.tags
+    // 更新本地存储
+    this.updateGeneratedNote({ tags: this.data.tags })
+  },
+
+  // 更新生成的笔记到本地存储
+  updateGeneratedNote(updates) {
+    try {
+      const note = wx.getStorageSync('generatedNote') || {}
+      const updatedNote = { ...note, ...updates }
+      wx.setStorageSync('generatedNote', updatedNote)
+    } catch (err) {
+      console.error('❌ 更新失败:', err)
+    }
   },
 
   // 复制文案

@@ -194,7 +194,7 @@ Page({
           filePath: tempFilePath,
           name: 'audio',
           formData: {
-            'platform': 'baidu'  // 使用 mock 模式，避免需要配置第三方服务
+            'platform': 'baidu' 
           },
           success: (res) => {
             if (res.statusCode === 200) {
@@ -281,7 +281,13 @@ Page({
       return
     }
 
-    app.globalData.voiceText = this.data.recordText
+    // 使用本地存储持久化数据
+    try {
+      wx.setStorageSync('voiceText', this.data.recordText)
+      console.log('✅ 语音文字已保存到本地存储')
+    } catch (err) {
+      console.error('❌ 保存失败:', err)
+    }
 
     wx.navigateTo({
       url: '/pages/preview/preview'

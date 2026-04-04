@@ -36,7 +36,13 @@ Page({
           hasImages: images.length > 0
         })
         
-        app.globalData.images = images
+        // 使用本地存储持久化图片列表
+        try {
+          wx.setStorageSync('images', images)
+          console.log('✅ 图片列表已保存到本地存储')
+        } catch (err) {
+          console.error('❌ 保存失败:', err)
+        }
       }
     })
   },
@@ -60,7 +66,12 @@ Page({
       hasImages: images.length > 0
     })
     
-    app.globalData.images = images
+    // 更新本地存储
+    try {
+      wx.setStorageSync('images', images)
+    } catch (err) {
+      console.error('❌ 保存失败:', err)
+    }
   },
 
   // 下一步
