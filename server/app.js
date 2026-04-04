@@ -29,9 +29,13 @@ app.use((err, req, res, next) => {
   })
 })
 
-// 启动服务
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`✅ Server is running on http://localhost:${PORT}`)
-  console.log(`📱 局域网访问: http://192.168.3.239:${PORT}`)
-  console.log(`📝 Note Maker API is ready`)
-})
+// Vercel 部署时不执行 listen
+if (require.main === module) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`✅ Server is running on http://localhost:${PORT}`)
+    console.log(`📱 局域网访问: http://192.168.3.239:${PORT}`)
+    console.log(`📝 Note Maker API is ready`)
+  })
+}
+
+module.exports = app
