@@ -69,8 +69,8 @@ class VoiceService {
  * @return string 鉴权签名信息（Access Token）
  */
   async getAccessToken() {
-    const AK = process.env.BAIDU_AK || "vqVTIoLFN98uayAh3oDVWkL0"
-    const SK = process.env.BAIDU_SK || "jWsCjWBJPZfDCBWNk27FKCQCiFl38fRX"
+    const AK = "vqVTIoLFN98uayAh3oDVWkL0"
+    const SK = "jWsCjWBJPZfDCBWNk27FKCQCiFl38fRX"
 
     let options = {
       'method': 'POST',
